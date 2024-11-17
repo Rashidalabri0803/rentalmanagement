@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'trntal_management.urls'
+ROOT_URLCONF = 'rental_management.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'trntal_management.wsgi.application'
+WSGI_APPLICATION = 'rental_management.wsgi.application'
 
 
 # Database
