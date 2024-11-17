@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>العقارات المتاحة</title>
+</head>
+<body>
+  <h1>العقارات المتاحة</h1>
+  <ul>
+    {% for property in properties %}
+      <li>
+        <h2>{{ property.name }}</h2>
+        <p>الوصف: {{ property.description }}</p>
+        <p>السعر: {{ property.price_per_month }} / شهر</p>
+        <p>الموقع: {{ property.location }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
