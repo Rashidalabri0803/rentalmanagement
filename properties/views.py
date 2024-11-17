@@ -26,4 +26,4 @@ def add_property(request):
             return redirect('property_list')
     else:
         form = PropertyForm()
-    return render(request, 'properties/add_property.html', {'form': form}
+    return render(request, 'properties/add_property.html', {'form': form})
