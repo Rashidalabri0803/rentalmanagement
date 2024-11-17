@@ -1,7 +1,11 @@
 from django.urls import path
 
-from .views import property_list
+from . import views
+
+app_name = 'properties'
 
 urlpatterns = [
-    path('', property_list, name='property_list'),
+    path('', views.property_list, name='property_list'),
+    path('<int:property_id>/', views.property_detail, name='property_detail'),
+    path('add/', views.add_property, name='add_property'),
 ]
