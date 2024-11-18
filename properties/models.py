@@ -18,6 +18,7 @@ class Property(models.Model):
     description = models.TextField(verbose_name="وصف العقار")
     price_per_month = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="السعر لكل شهر")
     location = models.CharField(max_length=255, verbose_name="الموقع")
+    category = models.ForeignKey(PropertyCatagory, on_delete=models.SET_NULL, null=True, related_name="properties", verbose_name="الفئة")
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', verbose_name="مالك العقار")
     available = models.DateField(default=True, verbose_name="متاح للايجار")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاريخ الإنشاء")
