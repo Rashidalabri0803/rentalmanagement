@@ -50,4 +50,4 @@ def review_property(request, property_id):
             return redirect('properties:property_detail', property_id=property_id)
     else:
         form = ReviewForm()
-    return render(request, 'properties/review_property.html', {'form': form, 'property': property_obj}
+    return render(request, 'properties/review_property.html', {'form': form, 'property': property_obj})
