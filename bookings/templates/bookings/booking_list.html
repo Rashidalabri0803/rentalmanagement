@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>قائمة الحجوزات</title>
+</head>
+<body>
+    <h1>حجوزاتي</h1>
+    <ul>
+        {% for booking in bookings %}
+            <li>
+                <h2>{{ booking.property.name }}</h2>
+                <p>تاريخ البدء: {{ booking.start_date }}</p>
+                <p>تاريخ الانتهاء: {{ booking.end_date }}</p>
+                <p>الحالة: {% if booking.is_approved %}مقبول{% else %}في الانتظار{% endif %}</p>
+                {% if booking.comments %}
+                    <p>تعليقات: {{ booking.comments }}</p>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

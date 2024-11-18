@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>قائمة العقارات</title>
+</head>
+<body>
+    <h1>العقارات المتاحة</h1>
+    <ul>
+        {% for property in properties %}
+            <li>
+                <h2>< a href="{% url 'properties:property_detail' property.id %}">{{ property.name }}</a></h2>
+                <p>{{ property.description }}</p>
+                <p>السعر: {{ property.price_per_night }} ريال </p>
+                <p>الموقع: {{ property.location }}</p>
+                {% if property.category %}
+                <p>الفئة: {{ property.category.name }}</p>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

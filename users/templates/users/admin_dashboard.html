@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة التحكم</title>
+</head>
+<body>
+    <h1>مرحبا {{ request.user.username }}</h1>
+    <ul>
+        <li><a href="{% url 'properties:property_list' %}">إدارة العقارات</a></li>
+        <li><a href="{% url 'bookings:booking_list' %}">إدارة الحجوزات</a></li>
+        <li><a href="{% url 'users:update_profile' %}">تحديث الملف الشخصي</a></li>
+        <li><a href="{% url 'users:logout' %}">تسجيل الخروج</a></li>
+    </ul>
+</body>
+</html>

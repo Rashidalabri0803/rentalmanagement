@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ property.name }}</title>
+</head>
+<body>
+    <h1>{{ property.name }}</h1>
+    <p>{{ property.description }}</p>
+    <p>السعر: {{ property.price_per_month }} / شهر</p>
+    <p>الموقع: {{ property.location }}</p>
+    {% if property.category %}
+        <p>الفئة: {{ property.category.name }}</p>
+    {% endif %}
+    <h2>صور:</h2>
+    <div>
+        {% for image in images %}
+            <img src="{{ image.image.url }}" alt="{{ image.caption }}" style="max-width: 200px;">
+            <p>{{ image.caption }}</p>
+        {% endfor %}
+    </div>
+    {% if property.available %}
+        <form action="{% url 'booking:create_booking' property.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">طلب حجز</button>
+        </form>
+    {% else %}
+        <p>العقار غير متاح حاليا</p>
+    {% endif %}
+</body>
+</html>

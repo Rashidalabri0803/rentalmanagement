@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إضافة صورة للعقار</title>
+</head>
+<body>
+    <h1>إضافة صورة للعقار: {{ property.name }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">إضافة الصورة</button>
+    </form>
+</body>
+</html>
