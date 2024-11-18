@@ -10,6 +10,7 @@ class Booking(models.Model):
     start_date = models.DateField(verbose_name="تاريخ البدء")
     end_date = models.DateField(verbose_name="تاريخ النهاية")
     is_approved = models.BooleanField(default=False, verbose_name="مقبول")
+    comments = models.TextField(blank=True, null=True, verbose_name="التعليقات")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاريخ الإنشاء")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="تاريخ التحديث")
 
