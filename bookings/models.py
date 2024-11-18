@@ -15,3 +15,23 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"{self.customer.username} - {self.property.name} ({self.start_date} إلى {self.end_date})"
+
+    class Meta:
+        verbose_name = "حجز"
+        verbose_name_plural = "الحجوزات"
+        ordering = ['-created_at']
+
+class Review(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='reviews', verbose_name="العقار")
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews', verbose_name="العميل")
+    rating = models.IntegerField(verbose_name="التقييم")
+    comment = models.TextField(verbose_name="التعليق")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاريخ التقييم")
+
+    def __str__(self):
+        return f"{self.customer.username} - {self.property.name} ({self.rating}/5)"
+
+    class Meta:
+        verbose_name = "تقييم"
+        verbose_name_plural = "التقييمات"
+        ordering = ['-created_at']
