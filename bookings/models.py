@@ -1,12 +1,12 @@
 from django.db import models
-
+from datetime import date
 from properties.models import Property
 from users.models import User
 
 
 class Booking(models.Model):
     BOOKING_STATUS = (
-        ('Pending', 'قيد الانتظار'),
+        ('Pending', 'في الانتظار'),
         ('Confirmed', 'مقبول'),
         ('Cancelled', 'ملغى'),
     )
@@ -24,7 +24,12 @@ class Booking(models.Model):
 
     def calucalte_total_price(self):
         num_days = (self.end_date - self.start_date).days
-        return num_days * self.property.price_per_month / 30
+        return num_days * self.property.calucalte_price_per_day()
+
+    def cancel_booking(self):
+        self.status = 'Cancelled'
+        self.cancellation_date = date.today()
+        self.save()
 
     class Meta:
         verbose_name = "حجز"

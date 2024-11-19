@@ -5,7 +5,8 @@ from django.db import models
 class User(AbstractUser):
     USER_TYPES = (
         ('Customer', 'عميل'),
-        ('Owner', 'مالك')
+        ('Owner', 'مالك'),
+        ('Admin', 'مشرف'),
     )
     user_type = models.CharField(max_length=10, choices=USER_TYPES, default='Customer', verbose_name='نوع المستخدم')
     profile_picture = models.ImageField(upload_to='users/', blank=True, null=True, verbose_name="الصورة الشخصية")
@@ -21,3 +22,6 @@ class User(AbstractUser):
 
     def is_owner(self):
         return self.user_type == 'Owner'
+
+    def is_admin(self):
+        return self.user_type == 'Admin'

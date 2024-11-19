@@ -34,6 +34,8 @@ class Property(models.Model):
     description = models.TextField(verbose_name="الوصف")
     price_per_month = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="السعر لكل شهر")
     location = models.CharField(max_length=255, verbose_name="الموقع")
+    latitude = models.DecimalField(max_digits=10, decimal_places=6, verbose_name="خط العرض")
+    longitude = models.DecimalField(max_digits=10, decimal_places=6, verbose_name="خط الطول")
     category = models.ForeignKey(PropertyCatagory, on_delete=models.SET_NULL, null=True, related_name="properties", verbose_name="الفئة")
     owner = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='properties', verbose_name="المالك")
     rooms = models.PositiveIntegerField(default=1, verbose_name="عدد الغرف")
@@ -46,11 +48,8 @@ class Property(models.Model):
     def __str__(self):
         return self.name
 
-    def calculate_average_rating(self):
-        reviews = self.reviews.all()
-        if reviews.exists():
-            return sum(review.rating for review in reviews) / reviews.count()
-        return 0
+    def calculate_price_per_day(self):
+        return self.price_per_month / 30
 
     class Meta:
         verbose_name = "عقار"
