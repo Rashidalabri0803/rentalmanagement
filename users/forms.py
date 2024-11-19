@@ -1,34 +1,26 @@
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.models import User
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
-from .models import User
 
-class CustomerUserCreationForm(UserCreationForm):
-    class Meta:
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
         model = User
-        fields = ['username', 'email', 'is_customer', 'is_admin', 'password1', 'password2']
-        labels = {
-            'is_customer': 'تسجيل كعميل',
-            'is_admin': 'تسجيل كمشرف',
-        }
+        fields = ('username', 'email', 'password1', 'password2', 'user_type', 'profile_picture', 'phone_number', 'address')
         widgets = {
-            'profile_picture': forms.FileInput(attrs={'accept': 'image/*'}),
+            'profile_picture': forms.ClearableFileInput(attrs={'accept': 'image/*'}),
+            'user_type': forms.Select(attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'user_type': 'نوع المستخدم',
+            'profile_picture': 'الصورة الشخصية',
+            'phone_number': 'رقم الهاتف',
+            'address': 'العنوان',
         }
 
 class CustomUserUpdateForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'profile_picture']
+        fields = ('username', 'email', 'profile_picture', 'phone_number', 'address')
         widgets = {
-            'profile_picture': forms.FileInput(attrs={'accept': 'image/*'}),
+            'profile_picture': forms.ClearableFileInput(attrs={'accept': 'image/*'}),
         }
-
-class CustomerLoginForm(AuthenticationForm):
-    username = forms.CharField(
-        widget= forms.TextInput(attrs={'placeholder': 'كلمة المرور'}),
-        label='اسم المستخدم',
-    )
-    password = forms.CharField(
-        widget= forms.PasswordInput(attrs={'placeholder': 'كلمة المرور'}),
-        label='كلمة المرور',
-    )
-    

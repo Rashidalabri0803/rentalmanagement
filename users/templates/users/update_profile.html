@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تحديث الملف الشخصي</title>
+</head>
+<body>
+    <h1>تحديث الملف الشخصي</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">حفظ التعديلات</button>
+    </form>
+    <p>
+        <a href="{% url 'users:dashboard' %}">العودة إلى لوحة التحكم</a>
+    </p>
+</body>
+</html>
