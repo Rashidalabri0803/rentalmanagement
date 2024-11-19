@@ -12,6 +12,17 @@ class PropertyCatagory(models.Model):
     class Meta:
         verbose_name = "فئة العقار"
         verbose_name_plural = "فئات العقارات"
+
+class PropertyFeature(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="الميزة")
+    description = models.TextField(blank=True, verbose_name="وصف الميزة")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "ميزة العقار"
+        verbose_name_plural = "ميزات العقارات"
         
 class Property(models.Model):
     name = models.CharField(max_length=255, verbose_name="اسم العقار")
@@ -27,8 +38,11 @@ class Property(models.Model):
     def __str__(self):
         return self.name
 
-    def is_rentable(self):
-        return self.available
+    def calculate_average_rating(self):
+        reviews = self.reviews.all()
+        if reviews.exists():
+            return sum(review.rating for review in reviews) / reviews.count()
+        return 0
 
     class Meta:
         verbose_name = "عقار"
