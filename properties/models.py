@@ -25,13 +25,21 @@ class PropertyFeature(models.Model):
         verbose_name_plural = "ميزات العقارات"
         
 class Property(models.Model):
+    PROPERTY_STATUS = (
+        ('Available', 'متوفر'),
+        ('Rented', 'مؤجر'),
+        ('Unavailable', 'غير متاح'),
+    )
     name = models.CharField(max_length=255, verbose_name="اسم العقار")
-    description = models.TextField(verbose_name="وصف العقار")
+    description = models.TextField(verbose_name="الوصف")
     price_per_month = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="السعر لكل شهر")
     location = models.CharField(max_length=255, verbose_name="الموقع")
     category = models.ForeignKey(PropertyCatagory, on_delete=models.SET_NULL, null=True, related_name="properties", verbose_name="الفئة")
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', verbose_name="مالك العقار")
-    available = models.DateField(default=True, verbose_name="متاح للايجار")
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='properties', verbose_name="المالك")
+    rooms = models.PositiveIntegerField(default=1, verbose_name="عدد الغرف")
+    bathrooms = models.PositiveIntegerField(default=1, verbose_name="عدد الحمامات")
+    area = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="المساحة بالمتر المربع")
+    status = models.CharField(max_length=15, choices=PROPERTY_STATUS, default='Available', verbose_name="الحالة")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاريخ الإنشاء")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="تاريخ التحديث")
 

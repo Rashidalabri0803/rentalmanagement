@@ -5,10 +5,9 @@ from .models import Booking, Review
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('property', 'customer', 'start_date', 'end_date', 'is_approved', 'created_at')
-    list_filter = ('is_approved', 'start_date', 'end_date')
-    search_fields = ('property__name', 'cuustomer__username')
-    list_editable = ('is_approved',)
+    list_display = ('property', 'customer', 'start_date', 'end_date', 'status', 'cancellation_date')
+    list_filter = ('status', 'start_date', 'end_date')
+    search_fields = ('property__name', 'customer__username')
     ordering = ('-created_at',)
     fieldsets = (
         (None, {'fields': ('property', 'customer', 'start_date', 'end_date', 'is_approved', 'comments')}),

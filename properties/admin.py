@@ -14,9 +14,9 @@ class PropertyCategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Property)
 class PropertyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner', 'category', 'price_per_month', 'available', 'created_at')
-    list_filter = ('category', 'available', 'location')
-    search_fields = ('name', 'location', 'owner__username')
+    list_display = ('name', 'owner', 'status', 'price_per_month', 'created_at')
+    list_filter = ('status', 'category', 'created_at')
+    search_fields = ('name', 'owner__username', 'location')
     list_editable = ('available',)
     inlines = [PropertyImageInline]
     ordering = ('created_at',)
