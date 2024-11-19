@@ -6,17 +6,15 @@ from .models import Booking, Review
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['property', 'start_date', 'end_date', 'comments']
+        fields = ['property', 'start_date', 'end_date']
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date'}),
             'end_date': forms.DateInput(attrs={'type': 'date'}),
-            'comments': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
         }
         labels = {
             'property': 'العقار',
             'start_date': 'تاريخ البدء',
             'end_date': 'تاريخ الانتهاء',
-            'comments': 'التعليقات',
         }
 
     def clean(self):

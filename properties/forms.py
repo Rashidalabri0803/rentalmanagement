@@ -6,7 +6,7 @@ from .models import Property, PropertyImage, PropertyCatagory
 class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
-        fields = ['name', 'description', 'price_per_month', 'location', 'category', 'available']
+        fields = ['name', 'description', 'price_per_month', 'location', 'category']
         widgets = {
             'descriptiom': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
             'location': forms.TextInput(attrs={'placeholder': 'اكتب موقع العقار'}),
@@ -17,7 +17,6 @@ class PropertyForm(forms.ModelForm):
             'price_per_month': 'السعر الشهري',
             'location': 'الموقع',
             'category': 'فئة العقار',
-            'available': 'متاح للايجار',
         }
 
 class PropertyImageForm(forms.ModelForm):
